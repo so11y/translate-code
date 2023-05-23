@@ -3,6 +3,7 @@
   "displayName": "translate_code",
   "description": "一个使用无头浏览器来进行的文本翻译",
   "version": "0.0.1",
+  "publisher":"zrrz",
   "engines": {
     "vscode": "^1.78.0"
   },
