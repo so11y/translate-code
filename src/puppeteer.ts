@@ -4,9 +4,10 @@ export async function puppeteerInit() {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   await page.goto("https://fanyi.baidu.com/?aldtype=16047#auto/zh");
-  await page.$eval("#app-guide", (el) => {
-    return el.remove();
-  });
+  await Promise.all([
+    page.$eval("#app-guide", (el) => el.remove()),
+    page.$eval("#desktop-guide-wrapper", (el) => el.remove()),
+  ]);
   return {
     page: [page, browser],
     async translate(text: string): Promise<Array<Record<string, any>>> {
