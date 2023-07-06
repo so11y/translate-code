@@ -3,12 +3,12 @@
   "displayName": "translate_code",
   "description": "一个使用无头浏览器来进行的文本翻译",
   "version": "0.1.0",
-  "publisher":"zrrz",
+  "publisher": "zrrz",
   "engines": {
     "vscode": "^1.78.0"
   },
   "author": {
-    "name":"zrrz",
+    "name": "zrrz",
     "url": "https://github.com/so11y"
   },
   "categories": [
@@ -48,6 +48,6 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "puppeteer": "^20.3.0"
+    "axios": "^1.4.0"
   }
 }

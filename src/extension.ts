@@ -1,21 +1,22 @@
 import * as vscode from "vscode";
-import { puppeteerInit } from "./puppeteer";
+import remoteTranslate from "./remoteTranslate";
 import { TranslateHover } from "./provide/hoveProvide";
 
-const puppeteerSource = puppeteerInit();
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.languages.registerHoverProvider(
       "*",
-      new TranslateHover(puppeteerSource)
+      new TranslateHover(remoteTranslate())
     )
   );
   context.subscriptions.push(
     vscode.workspace.registerTextDocumentContentProvider("translate", {
       async provideTextDocumentContent(uri: vscode.Uri): Promise<string> {
-        const data = await (await puppeteerSource).translate(uri.path);
-        return  data.map(i=>i.dst).join("\n");
+
+        console.log(uri.path,'---');
+        const data = await remoteTranslate().translate(uri.path);
+        return  data;
       },
     })
   );
@@ -32,5 +33,4 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export async function deactivate() {
-  (await puppeteerSource).page[0].close();
 }
